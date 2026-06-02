@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class SmartParking {
+private:
+static const int totalSlots = 10;
+string slots[totalSlots];
+public:
+SmartParking() {
+for(int i = 0; i < totalSlots; i++) {
+slots[i] = "Empty";
+}
+}
+void parkVehicle(string vehicleNumber) {
+for(int i = 0; i < totalSlots; i++) {
+if(slots[i] == "Empty") {
+slots[i] = vehicleNumber;
+cout << "Vehicle parked at slot " << i + 1 << endl;
+return;
+}
+}
+cout << "Parking Full! No available slots.\n";
+}
+void removeVehicle(string vehicleNumber) {
+for(int i = 0; i < totalSlots; i++) {
+if(slots[i] == vehicleNumber) {
+slots[i] = "Empty";
+cout << "Vehicle removed from slot " << i + 1 << endl;
+return;
+}
+}
+cout << "Vehicle not found!\n";
+}
+void displayStatus() {
+cout << "\nParking Status:\n";
+for(int i = 0; i < totalSlots; i++) {
+cout << "Slot " << i + 1 << ": " << slots[i] << endl;
+}
+}
+void searchVehicle(string vehicleNumber) {
+for(int i = 0; i < totalSlots; i++) {
+if(slots[i] == vehicleNumber) {
+cout << "Vehicle found at slot " << i + 1 << endl;
+return;
+}
+}
+cout << "Vehicle not found!\n";
+}
+};
+int main() {
+SmartParking parking;
+int choice;
+string vehicleNumber;
+do {
+cout << "\n===== Smart Parking Assistant =====\n";
+cout << "1. Park Vehicle\n";
+cout << "2. Remove Vehicle\n";
+cout << "3. Search Vehicle\n";
+cout << "4. Display Parking Status\n";
+cout << "5. Exit\n";
+cout << "Enter your choice: ";
+cin >> choice;
+switch(choice) {
+case 1:
+cout << "Enter vehicle number: ";
+cin >> vehicleNumber;
+parking.parkVehicle(vehicleNumber);
+break;
+case 2:
+cout << "Enter vehicle number: ";
+cin >> vehicleNumber;
+parking.removeVehicle(vehicleNumber);
+break;
+case 3:
+cout << "Enter vehicle number: ";
+cin >> vehicleNumber;
+parking.searchVehicle(vehicleNumber);
+break;
+case 4:
+parking.displayStatus();
+break;
+case 5:
+cout << "Exiting system...\n";
+break;
+default:
+cout << "Invalid choice! Try again.\n";
+}
+} while(choice != 5);
+return 0;
+}
